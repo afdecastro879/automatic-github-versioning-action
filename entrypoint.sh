@@ -24,8 +24,8 @@ if [ "$GITHUB_REF" = "refs/heads/master" ]; then
 }
 EOF
   # Delete old alpha tags on release
-  numTags=$(git tag -l "*-alpha*" | wc -l | xargs)
-  if [ $numTags > 0 ]; then
+  numTags=$(git tag -l "*-alpha.*" | wc -l | xargs)
+  if [ $numTags -gt 0 ]; then
     git push -d origin $(git tag -l "*-alpha.*")
   fi
 fi
