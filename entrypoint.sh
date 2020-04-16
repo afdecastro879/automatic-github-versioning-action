@@ -1,9 +1,6 @@
 #!/bin/sh -l
 
-pwd
-
-git clone https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY} app
-cd app
+git fetch --unshallow
 
 # Generate tag
 ls -l
