@@ -31,3 +31,5 @@ EOF
     git push -d origin $(git tag -l "*-alpha.*")
   fi
 fi
+
+echo "::set-output name=tag::$tag"
