@@ -7,7 +7,7 @@ ls -l
 tag=v$(dotnet-gitversion -output json -showvariable SemVer)
 
 # Create tag in github
-if [ "$GITHUB_REF" = "refs/heads/develop" ]; then
+if [ "$GITHUB_REF" != "refs/heads/master" ]; then
   curl -s -X POST https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs -H "Authorization: token $GITHUB_TOKEN" \
     -d @- <<EOF
 {
