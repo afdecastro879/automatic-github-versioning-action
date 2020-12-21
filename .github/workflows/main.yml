@@ -6,7 +6,7 @@ jobs:
     name: Tag code
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v1
       - name: Hello world action step
         id: hello
         uses: ./
