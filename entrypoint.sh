@@ -19,12 +19,7 @@ fi
 
 # Create Release
 if [ "$GITHUB_REF" = "refs/heads/master" ]; then
-  content=$(curl -s -X POST https://api.github.com/repos/$GITHUB_REPOSITORY/releases -H "Authorization: token $GITHUB_TOKEN" \
-    -d @- <<EOF
-{
-  "tag_name": "$tag"
-}
-EOF)
+  content=$(curl -s -X POST https://api.github.com/repos/$GITHUB_REPOSITORY/releases -H "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\": \"$tag\"}")
   upload_url=$(jq -r '.upload_url' <<< ${upload_url})
 
   # Delete old alpha tags on release

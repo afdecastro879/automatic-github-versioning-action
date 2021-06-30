@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Test this flow
+      - name: Version
         uses: ./
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
