@@ -7,7 +7,7 @@ ls -l
 tag=v$(dotnet-gitversion -output json -showvariable SemVer)
 
 # Create tag in github
-if [ "$GITHUB_REF" != "refs/heads/master" && "$GITHUB_REF" != "refs/heads/main" ]; then
+if [ "$GITHUB_REF" != "refs/heads/master" ] && [ "$GITHUB_REF" != "refs/heads/main" ]; then
   curl -s -X POST https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs -H "Authorization: token $GITHUB_TOKEN" \
     -d @- <<EOF
 {
@@ -18,7 +18,7 @@ EOF
 fi
 
 # Create Release
-if [ "$GITHUB_REF" = "refs/heads/master" || "$GITHUB_REF" = "refs/heads/main" ]; then
+if [ "$GITHUB_REF" = "refs/heads/master" ] || [ "$GITHUB_REF" = "refs/heads/main" ]; then
   content=$(curl -s -X POST https://api.github.com/repos/$GITHUB_REPOSITORY/releases -H "Authorization: token $GITHUB_TOKEN" -d "{\"tag_name\": \"$tag\"}")
   upload_url=$(jq -r '.upload_url' <<< ${upload_url})
 
