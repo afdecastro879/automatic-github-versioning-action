@@ -6,3 +6,5 @@ runs:
 outputs:
   tag:
     description: 'The generated tag'
+  upload_url:
+    description: 'The upload URL for this release'

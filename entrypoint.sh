@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash -l
 
 git fetch --unshallow
 
@@ -19,12 +19,14 @@ fi
 
 # Create Release
 if [ "$GITHUB_REF" = "refs/heads/master" ]; then
-  curl -s -X POST https://api.github.com/repos/$GITHUB_REPOSITORY/releases -H "Authorization: token $GITHUB_TOKEN" \
+  content=$(curl -s -X POST https://api.github.com/repos/$GITHUB_REPOSITORY/releases -H "Authorization: token $GITHUB_TOKEN" \
     -d @- <<EOF
 {
   "tag_name": "$tag"
 }
-EOF
+EOF)
+  upload_url=$(jq -r '.upload_url' <<< ${upload_url})
+
   # Delete old alpha tags on release
   numTags=$(git tag -l "*-alpha.*" | wc -l | xargs)
   if [ $numTags -gt 0 ]; then
@@ -33,3 +35,4 @@ EOF
 fi
 
 echo "::set-output name=tag::$tag"
+echo "::set-output name=upload_url::$upload_url"
